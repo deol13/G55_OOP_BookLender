@@ -1,12 +1,46 @@
 package se.lexicon;
 
+import se.lexicon.model.Book;
+import se.lexicon.model.Person;
+
 public class App {
     public static void main(String[] args) {
-        // todo: needs completion
         // Initialize and display Book & Person instances
-        // Simulate borrowing a book
-        // Simulate returning a book
+        Person person1 = new Person("Dennis", "Olsen");
+        Person person2 = new Person("Johan", "Karlsson");
 
+        Book book1 = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling");
+        Book book2 = new Book("The Lord of the Rings: The Fellowship of the Ring", "J.R.R. Tolkien");
+        Book book3 = new Book("Eragon", "Christopher Paolini", person1);
+
+        System.out.println("Person one: " + person1.getPersonInformation());
+        System.out.println("Person two: "+person2.getPersonInformation());
+        System.out.println();
+
+        System.out.println("Book one: " + book1.getBookInformation());
+        System.out.println("Book two: " + book2.getBookInformation());
+        System.out.println("Book three: " + book3.getBookInformation());
+        System.out.println();
+
+        // Simulate borrowing a book
+        person1.loadBook(book1);
+        person2.loadBook(book2);
+
+        System.out.println("Loaned book one and two: ");
+        System.out.println(book1.getBookInformation());
+        System.out.println(book2.getBookInformation());
+        System.out.println();
+
+        // Simulate returning a book
+        person1.returnBook(book1);
+        person1.returnBook(book3);
+
+        person2.returnBook(book2);
+
+        System.out.println("Return all the books: ");
+        System.out.println(book1.getBookInformation());
+        System.out.println(book2.getBookInformation());
+        System.out.println(book3.getBookInformation());
     }
 
 }
