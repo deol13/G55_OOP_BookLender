@@ -36,18 +36,6 @@ public class Book {
 
     // Getters and setters
 
-    public String getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
     public boolean isAvailable() {
         return available;
     }
@@ -57,8 +45,10 @@ public class Book {
     }
 
     public void setBorrower(Person borrower) {
-        this.borrower = borrower;
-        available = borrower == null;
+        if(this.borrower != null) {
+            this.borrower = borrower;
+            available = borrower == null;
+        }
     }
 
     // Methods

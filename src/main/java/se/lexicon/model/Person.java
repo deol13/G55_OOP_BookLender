@@ -1,5 +1,10 @@
 package se.lexicon.model;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * This class represents a Person model with properties and methods
  * to manage personal details and interactions with the library system.
@@ -8,9 +13,11 @@ public class Person {
     // Fields
 
     private static int sequencer = 0;
-    private int id;
+    private final int id;
     private String firstName;
     private String lastName;
+
+    private List<Book> books;
 
     // Constructors
 
@@ -18,25 +25,14 @@ public class Person {
         setFirstName(firstName);
         setLastName(lastName);
         id = getNextId();
+        books = new ArrayList<Book>();
     }
 
     // Getters and setters
 
-    public int getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         if(firstName == null || firstName.isEmpty()) throw new IllegalArgumentException("First name can't be null or empty");
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
@@ -46,18 +42,22 @@ public class Person {
 
     // Methods
 
-    public static int getNextId() {
+    private static int getNextId() {
         return ++sequencer;
     }
 
     public void loadBook(Book book) {
-        if(book.isAvailable())
+        if(book.isAvailable()) {
             book.setBorrower(this);
+            books.add(book);
+        }
     }
 
     public void returnBook(Book book) {
-        if(book.getBorrower() == this)
+        if(book.getBorrower() == this) {
             book.setBorrower(null);
+            books.remove(book);
+        }
     }
 
     public String getPersonInformation() {
@@ -65,6 +65,15 @@ public class Person {
         sb.append("id: ").append(id)
                 .append(", Name: ").append(firstName)
                 .append(" ").append(lastName);
+
+        return sb.toString();
+    }
+
+    public String getAllBorrowedBooksInformation() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Books borrowed: \n");
+        for (Book book : books)
+            sb.append("book: ").append(book.getBookInformation()).append("\n");
         return sb.toString();
     }
 }
