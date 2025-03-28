@@ -46,6 +46,9 @@ public class Person {
         return ++sequencer;
     }
 
+    // Load/return methods only changes books list to lower the interaction between Book and Person.
+    // Personally I think its bettet to have a separate method in another class that handles both Book and Person object
+    // so Person and Book stays separate and focus on themselves.
     public void loadBook(Book book) {
         if(book.isAvailable())
             books.add(book);

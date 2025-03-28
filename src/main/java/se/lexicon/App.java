@@ -34,9 +34,9 @@ public class App {
 
         // Simulate borrowing a book
         person1.loadBook(book3);
-        book3.setBorrower(person1);
+        book3.loadThisBook(person1);
         person2.loadBook(book2);
-        book2.setBorrower(person2);
+        book2.loadThisBook(person2);
 
         System.out.println("Loaned all books: ");
         System.out.println(book1.getBookInformation());
@@ -49,8 +49,11 @@ public class App {
 
         // Simulate returning a book
         person1.returnBook(book1);
-        person1.returnBook(book3);
+        book1.returnThisBook();
         person2.returnBook(book2);
+        book2.returnThisBook();
+        person1.returnBook(book3);
+        book3.returnThisBook();
 
         System.out.println("Return all the books: ");
         System.out.println(book1.getBookInformation());
