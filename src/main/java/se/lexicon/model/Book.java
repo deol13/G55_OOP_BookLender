@@ -22,7 +22,6 @@ public class Book {
 
     public Book(String title, String author) {
         this(title, author, null);
-        this.id = UUID.randomUUID().toString();
     }
 
     public Book(String title, String author, Person borrower) {
@@ -30,7 +29,12 @@ public class Book {
         else this.title = title;
         if (author == null || author.isEmpty()) throw new IllegalArgumentException("Author can't be null or empty");
         else this.author = author;
-        setBorrower(borrower);
+
+        available = true;
+        if(borrower == null)
+            setBorrower(borrower);
+        else
+            borrower.loadBook(this);
         this.id = UUID.randomUUID().toString();
     }
 
@@ -45,10 +49,10 @@ public class Book {
     }
 
     public void setBorrower(Person borrower) {
-        if(this.borrower != null) {
+        if(this.borrower == null) {
             this.borrower = borrower;
-            available = borrower == null;
         }
+        available = borrower == null;
     }
 
     // Methods

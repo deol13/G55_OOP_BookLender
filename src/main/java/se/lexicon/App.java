@@ -9,21 +9,30 @@ public class App {
         Person person1 = new Person("Dennis", "Olsen");
         Person person2 = new Person("Johan", "Karlsson");
 
-        Book book1 = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling");
+        Book book1 = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", person1);
         Book book2 = new Book("The Lord of the Rings: The Fellowship of the Ring", "J.R.R. Tolkien");
         Book book3 = new Book("Eragon", "Christopher Paolini");
 
+
+        System.out.println("All person: ");
         System.out.println("Person one: " + person1.getPersonInformation());
         System.out.println("Person two: " + person2.getPersonInformation());
+
         System.out.println();
 
+        System.out.println("All persons borrowed books: ");
+        System.out.println("Person one books: " + person1.getAllBorrowedBooksInformation());
+        System.out.println("Person one books: " + person2.getAllBorrowedBooksInformation());
+
+        System.out.println();
+
+        System.out.println("All books: ");
         System.out.println("Book one: " + book1.getBookInformation());
         System.out.println("Book two: " + book2.getBookInformation());
         System.out.println("Book three: " + book3.getBookInformation());
         System.out.println();
 
         // Simulate borrowing a book
-        person1.loadBook(book1);
         person1.loadBook(book3);
         person2.loadBook(book2);
 
