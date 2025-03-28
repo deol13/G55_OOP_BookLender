@@ -47,17 +47,13 @@ public class Person {
     }
 
     public void loadBook(Book book) {
-        if(book.isAvailable()) {
-            book.setBorrower(this);
+        if(book.isAvailable())
             books.add(book);
-        }
     }
 
     public void returnBook(Book book) {
-        if(book.getBorrower() == this) {
-            book.setBorrower(null);
+        if(book.getBorrower() == this)
             books.remove(book);
-        }
     }
 
     public String getPersonInformation() {

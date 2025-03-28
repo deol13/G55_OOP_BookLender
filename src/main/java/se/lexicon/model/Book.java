@@ -31,10 +31,12 @@ public class Book {
         else this.author = author;
 
         available = true;
-        if(borrower == null)
-            setBorrower(borrower);
-        else
+        if(borrower != null) {
             borrower.loadBook(this);
+            setBorrower(borrower);
+        }
+        else setBorrower(borrower);
+
         this.id = UUID.randomUUID().toString();
     }
 

@@ -34,7 +34,9 @@ public class App {
 
         // Simulate borrowing a book
         person1.loadBook(book3);
+        book3.setBorrower(person1);
         person2.loadBook(book2);
+        book2.setBorrower(person2);
 
         System.out.println("Loaned all books: ");
         System.out.println(book1.getBookInformation());
