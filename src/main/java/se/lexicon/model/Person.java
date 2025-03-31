@@ -4,6 +4,7 @@ package se.lexicon.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents a Person model with properties and methods
@@ -31,12 +32,13 @@ public class Person {
     // Getters and setters
 
     public void setFirstName(String firstName) {
-        if(firstName == null || firstName.isEmpty()) throw new IllegalArgumentException("First name can't be null or empty");
+        //Objects.requireNonNull(firstName, "FirstName should not be null!");
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
-        if(lastName == null || lastName.isEmpty()) throw new IllegalArgumentException("Last name can't be null or empty");
+        if (lastName == null || lastName.isEmpty())
+            throw new IllegalArgumentException("Last name can't be null or empty");
         this.lastName = lastName;
     }
 
@@ -46,17 +48,20 @@ public class Person {
         return ++sequencer;
     }
 
-    // Load/return methods only changes books list to lower the interaction between Book and Person.
-    // Personally I think its bettet to have a separate method in another class that handles both Book and Person object
-    // so Person and Book stays separate and focus on themselves.
+    // Encapsulate the function of borrowing a book in Person object
+
     public void loadBook(Book book) {
-        if(book.isAvailable())
+        if (book.isAvailable()) {
+            book.setBorrower(this);
             books.add(book);
+        }
     }
 
     public void returnBook(Book book) {
-        if(book.getBorrower() == this)
+        if (book.getBorrower() == this) {
+            book.setBorrower(null);
             books.remove(book);
+        }
     }
 
     public String getPersonInformation() {

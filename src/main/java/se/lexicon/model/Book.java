@@ -30,7 +30,6 @@ public class Book {
         if (author == null || author.isEmpty()) throw new IllegalArgumentException("Author can't be null or empty");
         else this.author = author;
 
-        // I personally don't like this, I would not allow Person to be sent in here, instead I would just have load/return methods
         available = true;
         if(borrower != null) {
             borrower.loadBook(this);
@@ -51,27 +50,12 @@ public class Book {
         return borrower;
     }
 
-    // I think its cleaner to have load/return methods that does the checks and then a separate set borrow method.
-    // This way I can use setBorrow at any time inside this class and its much clearer what the user wants to do with separate load/return methods.
-    private void setBorrower(Person borrower) {
+    public void setBorrower(Person borrower) {
         this.borrower = borrower;
         available = borrower == null;
     }
 
     // Methods
-
-    public boolean loadThisBook(Person borrower){
-        if(available) {
-            setBorrower(borrower);
-            return true;
-        }
-        return false;
-    }
-
-    public void returnThisBook(){
-        if(!available)
-            setBorrower(null);
-    }
 
     public String getBookInformation() {
         StringBuilder sb = new StringBuilder();
